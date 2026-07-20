@@ -49,6 +49,7 @@ app.get("/auth/sign-in", authCtrl.showSignInForm);
 app.post("/auth/sign-in", authCtrl.signIn);
 app.delete("/auth/sign-out", authCtrl.signOut);
 
+app.get('/listings/index', isSignedIn, listingCtrl.index)
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 app.get("/listings/new", isSignedIn, listingCtrl.showNewForm);
 app.post("/listings", isSignedIn, listingCtrl.create);

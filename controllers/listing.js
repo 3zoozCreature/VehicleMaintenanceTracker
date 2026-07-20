@@ -12,7 +12,14 @@ const create = async (req, res) => {
     res.redirect("/dashboard");
 };
 
+const index = async (req, res) => {
+    const allListings = await Listing.find().populate('owner')
+   
+    res.render('listings/index.ejs', {allListings})
+}
+
 module.exports = {
     showNewForm,
     create,
+    index,
 };

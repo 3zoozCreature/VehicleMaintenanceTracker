@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>All Listings</title>
 </head>
+
 <body>
-    
+    <h1>View All the Listings</h1>
+    <ul>
+        <% allListings.forEach((item)=> { %>
+
+            <li>
+                <a href="/listings/<%= item.service %>">
+                    <img src="<%= item.image.url %>" width="200px"> <br />
+                    A listing in <%= item.location %>
+                        Owned by: <%= item.owner.username %>
+                </a>
+            </li>
+
+            <% }) %>
+    </ul>
 </body>
+
 </html>
