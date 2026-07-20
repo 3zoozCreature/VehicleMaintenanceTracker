@@ -9,14 +9,14 @@ const create = async (req, res) => {
 
     await Listing.create(req.body);
 
-    res.redirect("/dashboard");
+    res.redirect("/listings");
 };
 
 const index = async (req, res) => {
-    const allListings = await Listing.find().populate('owner')
+    const allListings = await Listing.find().populate("owner");
    
-    res.render('listings/index.ejs', {allListings})
-}
+    res.render("listings/index.ejs", { allListings });
+};
 
 module.exports = {
     showNewForm,

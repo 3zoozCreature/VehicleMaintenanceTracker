@@ -1,27 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("../partials/nav.ejs") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Listings</title>
-</head>
+<main class="page-container">
+    <h1>View All Listings</h1>
 
-<body>
-    <h1>View All the Listings</h1>
+    <% if (allListings.length === 0) { %>
+        <p>No listings yet.</p>
+    <% } %>
+
     <ul>
-        <% allListings.forEach((item)=> { %>
-
+        <% allListings.forEach((item) => { %>
             <li>
-                <a href="/listings/<%= item.service %>">
-                    <img src="<%= item.image.url %>" width="200px"> <br />
-                    A listing in <%= item.location %>
-                        Owned by: <%= item.owner.username %>
-                </a>
+                <% if (item.image) { %>
+                    <img src="<%= item.image %>" alt="<%= item.service %>" width="200">
+                <% } %>
+
+                <h2><%= item.service %></h2>
+                <p>Location: <%= item.location %></p>
+                <p>Price: $<%= item.price %></p>
+                <p>Owned by: <%= item.owner.username %></p>
+                <p>Posted: <%= item.createdAt.toLocaleDateString() %></p>
             </li>
-
-            <% }) %>
+        <% }) %>
     </ul>
+</main>
 </body>
-
 </html>
