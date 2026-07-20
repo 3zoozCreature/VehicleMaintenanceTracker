@@ -1,0 +1,63 @@
+<%- include("../partials/nav.ejs") %>
+
+<main class="page-container">
+    <section class="auth-card">
+        <div class="auth-card-header">
+            <h1 class="auth-card-title">Edit Listing</h1>
+        </div>
+
+        <form class="auth-form" action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="service">Service</label>
+                <input
+                    class="form-input"
+                    type="text"
+                    name="service"
+                    id="service"
+                    value="<%= listing.service %>"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="location">Location</label>
+                <input
+                    class="form-input"
+                    type="text"
+                    name="location"
+                    id="location"
+                    value="<%= listing.location %>"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="price">Price</label>
+                <input
+                    class="form-input"
+                    type="number"
+                    name="price"
+                    id="price"
+                    min="0"
+                    value="<%= listing.price %>"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="image">Image URL</label>
+                <input
+                    class="form-input"
+                    type="text"
+                    name="image"
+                    id="image"
+                    value="<%= listing.image %>"
+                >
+            </div>
+
+            <button class="primary-button" type="submit">Update Listing</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

@@ -19,6 +19,7 @@
                 <p>Price: $<%= item.price %></p>
                 <p>Owned by: <%= item.owner.username %></p>
                 <p>Posted: <%= item.createdAt.toLocaleDateString() %></p>
+                <a href="/listings/<%= item._id %>/edit">Edit</a>
             </li>
         <% }) %>
     </ul>

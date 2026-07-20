@@ -54,6 +54,8 @@ app.get("/listings/index", isSignedIn, listingCtrl.index);
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 app.get("/listings/new", isSignedIn, listingCtrl.showNewForm);
 app.post("/listings", isSignedIn, listingCtrl.create);
+app.get("/listings/:id/edit", isSignedIn, listingCtrl.showEditForm);
+app.put("/listings/:id", isSignedIn, listingCtrl.update);
 
 const startServer = async () => {
     try {

@@ -12,6 +12,18 @@ const create = async (req, res) => {
     res.redirect("/listings");
 };
 
+const showEditForm = async (req, res) => {
+    const listing = await Listing.findById(req.params.id);
+
+    res.render("listings/edit.ejs", { listing });
+};
+
+const update = async (req, res) => {
+    await Listing.findByIdAndUpdate(req.params.id, req.body);
+
+    res.redirect("/listings/index");
+};
+
 const index = async (req, res) => {
     const allListings = await Listing.find().populate("owner");
    
@@ -21,5 +33,7 @@ const index = async (req, res) => {
 module.exports = {
     showNewForm,
     create,
+    showEditForm,
+    update,
     index,
 };
