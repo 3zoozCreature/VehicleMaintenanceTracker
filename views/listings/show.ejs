@@ -1,0 +1,20 @@
+<%- include("../partials/nav.ejs") %>
+
+<main class="page-container">
+    <% if (listing.image) { %>
+        <img src="<%= listing.image %>" alt="<%= listing.service %>" width="300">
+    <% } %>
+
+    <h1><%= listing.service %></h1>
+    <p>Location: <%= listing.location %></p>
+    <p>Price: $<%= listing.price %></p>
+    <p>Owned by: <%= listing.owner.username %></p>
+    <p>Posted: <%= listing.createdAt.toLocaleDateString() %></p>
+
+    <a href="/listings/<%= listing._id %>/edit">Edit</a>
+    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+</main>
+</body>
+</html>
