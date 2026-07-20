@@ -24,6 +24,12 @@ const update = async (req, res) => {
     res.redirect("/listings/index");
 };
 
+const deleteListing = async (req, res) => {
+    await Listing.findByIdAndDelete(req.params.id);
+
+    res.redirect("/listings/index");
+};
+
 const index = async (req, res) => {
     const allListings = await Listing.find().populate("owner");
    
@@ -35,5 +41,6 @@ module.exports = {
     create,
     showEditForm,
     update,
+    deleteListing,
     index,
 };
