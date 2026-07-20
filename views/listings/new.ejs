@@ -1,0 +1,59 @@
+<%- include("../partials/nav.ejs") %>
+
+<main class="page-container">
+    <section class="auth-card">
+        <div class="auth-card-header">
+            <h1 class="auth-card-title">Create Listing</h1>
+        </div>
+
+        <form class="auth-form" action="/listings" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="service">Service</label>
+                <input
+                    class="form-input"
+                    type="text"
+                    name="service"
+                    id="service"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="location">Location</label>
+                <input
+                    class="form-input"
+                    type="text"
+                    name="location"
+                    id="location"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="price">Price</label>
+                <input
+                    class="form-input"
+                    type="number"
+                    name="price"
+                    id="price"
+                    min="0"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="image">Image URL</label>
+                <input
+                    class="form-input"
+                    type="text"
+                    name="image"
+                    id="image"
+                >
+            </div>
+
+            <button class="primary-button" type="submit">Create Listing</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

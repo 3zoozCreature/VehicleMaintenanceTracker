@@ -1,12 +1,14 @@
 ﻿const dns = require("node:dns");
 
-// DNS workaround for MongoDB Atlas.
-// Remove these two lines if your regular DNS works correctly.
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
+
+dns.setServers
+
+(["8.8.8.8", "1.1.1.1"]);
 
 require("dotenv").config();
 
 const authCtrl = require("./controllers/auth.js");
+const listingCtrl = require("./controllers/listing.js");
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const methodOverride = require("method-override");
@@ -20,7 +22,7 @@ const path = require("path");
 
 const app = express();
 
-const PORT = process.env.PORT || 3000; // For me, this is best practice. Usually, the port is placed in .env; if not, 3000 will be used
+const PORT = process.env.PORT || 3000; 
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
@@ -48,6 +50,8 @@ app.post("/auth/sign-in", authCtrl.signIn);
 app.delete("/auth/sign-out", authCtrl.signOut);
 
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
+app.get("/listings/new", isSignedIn, listingCtrl.showNewForm);
+app.post("/listings", isSignedIn, listingCtrl.create);
 
 const startServer = async () => {
     try {
