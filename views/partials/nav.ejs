@@ -16,7 +16,9 @@
             <% if (user) { %>
                 <a class="site-nav-link" href="/dashboard">Dashboard</a>
                 <a class="site-nav-link" href="/listings">All Listings</a>
-                <a class="site-nav-link" href="/listings/new">New Listing</a>
+                <% if (user.role === "vendor") { %>
+                    <a class="site-nav-link" href="/listings/new">New Listing</a>
+                <% } %>
 
                 <form
                     class="site-nav-form"
