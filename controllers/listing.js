@@ -1,4 +1,5 @@
 const Listing = require("../models/listings");
+const Review = require("../models/review");
 
 const showNewForm = (req, res) => {
     res.render("listings/new.ejs");
@@ -14,8 +15,29 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
     const listing = await Listing.findById(req.params.id).populate("owner");
+    const reviews = await Review.find({ listing: req.params.id }).populate("author");
 
-    res.render("listings/show.ejs", { listing });
+    res.render("listings/show.ejs", { listing, reviews });
+};
+
+const createReview = async (req, res) => {
+    const listing = await Listing.findById(req.params.id);
+
+    if (!listing) {
+        return res.redirect("/listings");
+    }
+
+    if (!req.body.text || !req.body.text.trim()) {
+        return res.redirect(`/listings/${req.params.id}`);
+    }
+
+    await Review.create({
+        text: req.body.text.trim(),
+        author: req.session.user.id,
+        listing: listing._id,
+    });
+
+    res.redirect(`/listings/${req.params.id}`);
 };
 
 const showEditForm = async (req, res) => {
@@ -46,6 +68,7 @@ module.exports = {
     showNewForm,
     create,
     show,
+    createReview,
     showEditForm,
     update,
     deleteListing,

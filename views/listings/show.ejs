@@ -15,6 +15,46 @@
     <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete</button>
     </form>
+
+    <section class="auth-card">
+        <div class="auth-card-header">
+            <h2 class="auth-card-title">Reviews</h2>
+            <p class="auth-card-subtitle">
+                Share your experience with this listing.
+            </p>
+        </div>
+
+        <form
+            class="auth-form"
+            action="/listings/<%= listing._id %>/reviews"
+            method="POST"
+        >
+            <div class="form-group">
+                <label class="form-label" for="text">Write a Review</label>
+                <textarea
+                    class="form-input"
+                    name="text"
+                    id="text"
+                    rows="4"
+                    required = true
+                ></textarea>
+            </div>
+
+            <button class="primary-button" type="submit">Post Review</button>
+        </form>
+
+        <% if (reviews.length === 0) { %>
+            <p>No reviews yet.</p>
+        <% } else { %>
+            <% reviews.forEach((review) => { %>
+                <article class="form-group">
+                    <p><strong><%= review.author.username %></strong></p>
+                    <p><%= review.text %></p>
+                    <p><%= review.createdAt.toLocaleDateString() %></p>
+                </article>
+            <% }) %>
+        <% } %>
+    </section>
 </main>
 </body>
 </html>
