@@ -14,6 +14,12 @@ const showSignUpForm = (req, res) => {
 };
 
 const signUp = async (req, res) => {
+    let selectedRole = "regular";
+
+    if (req.body.role === "vendor") {
+        selectedRole = "vendor";
+    }
+
     const userInDatabase = await User.findOne({
         username: req.body.username,
     });
@@ -26,6 +32,7 @@ const signUp = async (req, res) => {
 
     const userData = {
         username: req.body.username,
+        role: selectedRole,
         password: hashedPassword,
     };
 
@@ -34,6 +41,7 @@ const signUp = async (req, res) => {
     req.session.user = {
         username: user.username,
         id: user.id,
+        role: user.role,
     };
 
     req.session.save(() => {
@@ -68,6 +76,7 @@ const signIn = async (req, res) => {
     req.session.user = {
         username: userInDatabase.username,
         id: userInDatabase.id,
+        role: userInDatabase.role,
     };
 
     req.session.save(() => {
