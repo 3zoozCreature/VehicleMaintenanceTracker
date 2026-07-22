@@ -10,15 +10,17 @@
     <ul>
         <% allListings.forEach((item) => { %>
             <li>
-                <% if (item.image) { %>
-                    <img src="<%= item.image %>" alt="<%= item.service %>" width="200">
-                <% } %>
+                <a class="listing-card-link" href="/listings/<%= item._id %>">
+                    <% if (item.image) { %>
+                        <img src="<%= item.image %>" alt="<%= item.service %>" width="200">
+                    <% } %>
 
-                <h2><a href="/listings/<%= item._id %>"><%= item.service %></a></h2>
-                <p>Location: <%= item.location %></p>
-                <p>Price: $<%= item.price %></p>
-                <p>Owned by: <%= item.owner.username %></p>
-                <p>Posted: <%= item.createdAt.toLocaleDateString() %></p>
+                    <h2><%= item.service %></h2>
+                    <p>Location: <%= item.location %></p>
+                    <p>Price: $<%= item.price %></p>
+                    <p>Owned by: <%= item.owner.username %></p>
+                    <p>Posted: <%= item.createdAt.toLocaleDateString() %></p>
+                </a>
             </li>
         <% }) %>
     </ul>
