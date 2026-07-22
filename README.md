@@ -22,7 +22,7 @@ A MEN stack app for vehicle service listings. Users can sign up, sign in, view s
 | Read | `show` | `GET` | `/listings/:id` | Show one listing |
 |  | `new` | `GET` | `/listings/new` | Show form to create a listing |
 | Create | `create` | `POST` | `/listings` | Add a new listing |
-|  | `edit` | `GET` | `/listings/:id/edit` | Show form to edit a listing |
+| Edit | `edit` | `GET` | `/listings/:id/edit` | Show form to edit a listing |
 | Update | `update` | `PUT` | `/listings/:id` | Save listing changes |
 | Delete | `delete` | `DELETE` | `/listings/:id` | Remove a listing |
 | Create | `createReview` | `POST` | `/listings/:id/reviews` | Add a review |
