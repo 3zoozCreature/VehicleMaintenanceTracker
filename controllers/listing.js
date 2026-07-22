@@ -2,7 +2,9 @@ const Listing = require("../models/listings");
 const Review = require("../models/review");
 
 const showNewForm = (req, res) => {
-    res.render("listings/new.ejs");
+    res.render("listings/new.ejs", {
+        title: "New Listing | Vehicle Maintenance Tracker",
+    });
 };
 
 const create = async (req, res) => {
@@ -17,7 +19,11 @@ const show = async (req, res) => {
     const listing = await Listing.findById(req.params.id).populate("owner");
     const reviews = await Review.find({ listing: req.params.id }).populate("author");
 
-    res.render("listings/show.ejs", { listing, reviews });
+    res.render("listings/show.ejs", {
+        listing,
+        reviews,
+        title: `${listing.service} | Vehicle Maintenance Tracker`,
+    });
 };
 
 const createReview = async (req, res) => {
@@ -60,7 +66,10 @@ const deleteReview = async (req, res) => {
 const showEditForm = async (req, res) => {
     const listing = await Listing.findById(req.params.id);
 
-    res.render("listings/edit.ejs", { listing });
+    res.render("listings/edit.ejs", {
+        listing,
+        title: `Edit ${listing.service} | Vehicle Maintenance Tracker`,
+    });
 };
 
 const update = async (req, res) => {
@@ -78,7 +87,10 @@ const deleteListing = async (req, res) => {
 const index = async (req, res) => {
     const allListings = await Listing.find().populate("owner");
    
-    res.render("listings/index.ejs", { allListings });
+    res.render("listings/index.ejs", {
+        allListings,
+        title: "All Listings | Vehicle Maintenance Tracker",
+    });
 };
 
 module.exports = {

@@ -4,12 +4,14 @@ const bcrypt = require("bcrypt");
 const home = (req, res) => {
     res.render("home.ejs", {
         user: req.session.user,
+        title: "Home | Vehicle Maintenance Tracker",
     });
 };
 
 const showSignUpForm = (req, res) => {
     res.render("auth/sign-up.ejs", {
         user: req.session.user,
+        title: "Sign Up | Vehicle Maintenance Tracker",
     });
 };
 
@@ -52,6 +54,7 @@ const signUp = async (req, res) => {
 const showSignInForm = (req, res) => {
     res.render("auth/sign-in.ejs", {
         user: req.session.user,
+        title: "Sign In | Vehicle Maintenance Tracker",
     });
 };
 
@@ -93,6 +96,7 @@ const signOut = (req, res) => {
 const dashboard = (req, res) => {
     res.render("dashboard.ejs", {
         user: req.session.user,
+        title: "Dashboard | Vehicle Maintenance Tracker",
     });
 };
 

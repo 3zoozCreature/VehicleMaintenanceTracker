@@ -9,6 +9,7 @@ require("dotenv").config();
 
 const authCtrl = require("./controllers/auth.js");
 const listingCtrl = require("./controllers/listing.js");
+const catchAsync = require("./middleware/catch-async.js");
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const isVendor = require("./middleware/is-vendor.js");
@@ -45,22 +46,22 @@ app.use(passUserToView);
 
 app.get("/", authCtrl.home);
 app.get("/auth/sign-up", authCtrl.showSignUpForm);
-app.post("/auth/sign-up", authCtrl.signUp);
+app.post("/auth/sign-up", catchAsync(authCtrl.signUp));
 app.get("/auth/sign-in", authCtrl.showSignInForm);
-app.post("/auth/sign-in", authCtrl.signIn);
+app.post("/auth/sign-in", catchAsync(authCtrl.signIn));
 app.delete("/auth/sign-out", authCtrl.signOut);
 
-app.get("/listings", isSignedIn, listingCtrl.index);
-app.get("/listings/index", isSignedIn, listingCtrl.index);
+app.get("/listings", isSignedIn, catchAsync(listingCtrl.index));
+app.get("/listings/index", isSignedIn, catchAsync(listingCtrl.index));
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 app.get("/listings/new", isSignedIn, isVendor, listingCtrl.showNewForm);
-app.post("/listings", isSignedIn, isVendor, listingCtrl.create);
-app.get("/listings/:id", isSignedIn, listingCtrl.show);
-app.post("/listings/:id/reviews", isSignedIn, listingCtrl.createReview);
-app.delete("/listings/:id/reviews/:reviewId", isSignedIn, listingCtrl.deleteReview);
-app.get("/listings/:id/edit", isSignedIn, listingCtrl.showEditForm);
-app.put("/listings/:id", isSignedIn, listingCtrl.update);
-app.delete("/listings/:id", isSignedIn, listingCtrl.deleteListing);
+app.post("/listings", isSignedIn, isVendor, catchAsync(listingCtrl.create));
+app.get("/listings/:id", isSignedIn, catchAsync(listingCtrl.show));
+app.post("/listings/:id/reviews", isSignedIn, catchAsync(listingCtrl.createReview));
+app.delete("/listings/:id/reviews/:reviewId", isSignedIn, catchAsync(listingCtrl.deleteReview));
+app.get("/listings/:id/edit", isSignedIn, catchAsync(listingCtrl.showEditForm));
+app.put("/listings/:id", isSignedIn, catchAsync(listingCtrl.update));
+app.delete("/listings/:id", isSignedIn, catchAsync(listingCtrl.deleteListing));
 
 const startServer = async () => {
     try {
