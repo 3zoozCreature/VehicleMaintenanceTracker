@@ -57,6 +57,7 @@ app.get("/listings/new", isSignedIn, isVendor, listingCtrl.showNewForm);
 app.post("/listings", isSignedIn, isVendor, listingCtrl.create);
 app.get("/listings/:id", isSignedIn, listingCtrl.show);
 app.post("/listings/:id/reviews", isSignedIn, listingCtrl.createReview);
+app.delete("/listings/:id/reviews/:reviewId", isSignedIn, listingCtrl.deleteReview);
 app.get("/listings/:id/edit", isSignedIn, listingCtrl.showEditForm);
 app.put("/listings/:id", isSignedIn, listingCtrl.update);
 app.delete("/listings/:id", isSignedIn, listingCtrl.deleteListing);

@@ -40,6 +40,22 @@ const createReview = async (req, res) => {
     res.redirect(`/listings/${req.params.id}`);
 };
 
+const deleteReview = async (req, res) => {
+    const review = await Review.findById(req.params.reviewId);
+
+    if (!review) {
+        return res.redirect(`/listings/${req.params.id}`);
+    }
+
+    if (review.author.toString() !== req.session.user.id) {
+        return res.redirect(`/listings/${req.params.id}`);
+    }
+
+    await Review.findByIdAndDelete(req.params.reviewId);
+
+    res.redirect(`/listings/${req.params.id}`);
+};
+
 
 const showEditForm = async (req, res) => {
     const listing = await Listing.findById(req.params.id);
@@ -70,6 +86,7 @@ module.exports = {
     create,
     show,
     createReview,
+    deleteReview,
     showEditForm,
     update,
     deleteListing,

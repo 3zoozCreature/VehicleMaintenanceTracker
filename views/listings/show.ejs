@@ -50,6 +50,14 @@
                 <article class="form-group">
                     <p><strong><%= review.author.username %></strong></p>
                     <p><%= review.text %></p>
+                    <% if (user && review.author._id.toString() === user.id) { %>
+                        <form
+                            action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                            method="POST"
+                        >
+                            <button type="submit">Delete Review</button>
+                        </form>
+                    <% } %>
                 </article>
             <% }) %>
         <% } %>
